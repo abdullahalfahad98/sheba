@@ -8,7 +8,7 @@ class Event(models.Model):
     event_date = models.DateField()
 
     class Meta:
-        ordering = ['created']
+        ordering = ['created_date']
         
 
     def __str__(self):
