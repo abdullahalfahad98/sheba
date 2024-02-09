@@ -13,3 +13,10 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class Donation(models.Model):
+    full_name = models.CharField(max_length=255)
+    amount = models.TextField()
+    purpose = models.CharField(max_length=255)
+    note = models.CharField(max_length=255)  # Specify max_length for the note field

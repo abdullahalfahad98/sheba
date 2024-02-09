@@ -1,30 +1,7 @@
-# from rest_framework import serializers
-# from event.models import Event
-# from django.utils import timezone
-
-# class EventSerializers(serializers.Serializer):
-    
-#     title = serializers.CharField(max_length=255)
-#     image = serializers.ImageField(required=False)  
-#     description = serializers.CharField() 
-#     created_date = serializers.DateField(read_only=True)
-#     event_date = serializers.DateField()
-
-
-#     def create(self, validated_data):
-#         # Set the created_date when creating a new instance
-#         validated_data['created_date'] = timezone.now().date()
-        
-#         # Custom handling of file upload path
-#         image = validated_data.pop('image')
-#         event = Event.objects.create(image=image, **validated_data)
-#         return event
-
-
-
 from rest_framework import serializers
 from event.models import Event
 from django.utils import timezone
+from .models import Donation
 
 class EventSerializer(serializers.ModelSerializer):
     
@@ -48,3 +25,18 @@ class EventSerializer(serializers.ModelSerializer):
         instance.event_date = validated_data.get('event_date', instance.event_date)
         instance.save()
         return instance
+    
+
+    
+class DonationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Donation
+        fields = '__all__'
+
+        def update(self, instance, validated_data):
+            instance.full_name = validated_data.get('full_name', instance.full_name)
+            instance.amount = validated_data.get('amount', instance.amount)
+            instance.purpose = validated_data.get('purpose', instance.purpose)
+            instance.note = validated_data.get('note', instance.note)
+            instance.save()
+            return instance
