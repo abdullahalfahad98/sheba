@@ -43,13 +43,9 @@ class EventList(APIView):
     def post(self, request, format=None):
         serializer = EventSerializer(data=request.data)
         if serializer.is_valid():
-            user = serializer.save()
-            token_obj, created = Token.objects.get_or_create(user=user)
-            if created:
-                return Response({'user':serializer.data, 'token': token_obj.key}, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            
 
             
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

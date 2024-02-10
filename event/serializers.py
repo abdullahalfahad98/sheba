@@ -1,3 +1,4 @@
+
 from rest_framework import serializers
 from event.models import Event
 from django.utils import timezone
@@ -27,7 +28,7 @@ class EventSerializer(serializers.ModelSerializer):
         return instance
     
 
-    
+  
 class DonationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Donation

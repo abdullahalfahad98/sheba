@@ -5,7 +5,7 @@ class Event(models.Model):
     image = models.ImageField(upload_to='event/images/', blank=True, null=True)  # You may specify the upload_to path as per your requirement
     description = models.TextField()
     created_date = models.DateField(auto_now_add=True)
-    event_date = models.DateField()
+    event_date = models.DateField(blank=True, null=True)
 
     class Meta:
         ordering = ['created_date']
